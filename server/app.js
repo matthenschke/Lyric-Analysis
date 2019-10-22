@@ -27,7 +27,7 @@ const url = "https://genius.com/Beyonce-drunk-in-love-lyrics";
 // set up genius api
 const api = require("genius-api");
 const genius = new api(
-  "-pFUR7fD5qinmFKVKmq_IXi0TXT9N51yx81hVEmz35DvXrErRCsDWpy1XNWHJyXv"
+  "API-KEY"
 );
 
 app.get('/songs/:query', (req,res) => {
