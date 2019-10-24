@@ -22,7 +22,6 @@ const nlu = new NaturalLanguageUnderstandingV1({
 // set up web-scraper tools
 const axios = require("axios");
 const cheerio = require("cheerio");
-const url = "https://genius.com/Beyonce-drunk-in-love-lyrics";
 
 // set up genius api
 const api = require("genius-api");
@@ -30,33 +29,35 @@ const genius = new api(
   "-pFUR7fD5qinmFKVKmq_IXi0TXT9N51yx81hVEmz35DvXrErRCsDWpy1XNWHJyXv"
 );
 
-app.get('/songs/:query', (req,res) => {
+app.get("/songs/:query", (req, res) => {
   let query = req.params.query;
   genius.search(query).then(function(response) {
-    res.json({"hits" : response.hits});
+    res.json({ hits: response.hits });
   });
 });
 
-app.get("/", (req, res) => {
+const getLyrics = (req, res, next) => {
   axios
-    .get(url)
+    .get(req.body.url)
     .then(response => {
       const data = response.data;
       const $ = cheerio.load(data);
       let lyrics = $(".lyrics").text();
       lyrics = lyrics.replace(/ *\[[^\]]*]/g, "").trim();
+      req.lyrics = lyrics;
+      next();
     })
     .catch(err => {
       console.log(err);
       res.json({ error: err });
     });
-});
+};
 
-app.post("/", (req, res) => {
-  console.log(req.body.text);
+app.post("/", getLyrics, (req, res) => {
+  console.log(req.lyrics);
   nlu
     .analyze({
-      text: req.body.text,
+      text: req.lyrics,
       features: {
         sentiment: {},
         concepts: {},
@@ -67,7 +68,7 @@ app.post("/", (req, res) => {
     .then(response => {
       const output = JSON.stringify(response.result, null, 5);
       console.log(output);
-      res.json(output);
+      res.json({ "lyrics" : req.lyrics, "analysis" : output });
     })
     .catch(err => {
       console.log("error: ", err);
