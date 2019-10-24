@@ -21,6 +21,15 @@
   color: #09d3ac;
 }
 
+#search-bar {
+  width: 430px;
+  height : 40px;
+  border-radius: 30px;
+}
+
+#submit-button {
+  border-radius: 30px;
+}
 #analysis-page {
-  text-align : center;
+  text-align: center;
 }
