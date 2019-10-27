@@ -1,5 +1,22 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+}
+ html, body{
+   width : 100vw;
+   height : 100vh;
+ }
+
+body {
+
+  background : linear-gradient(
+    35deg,
+    rgba(229, 112, 231, 1) 0%,
+    rgba(200, 94, 199, 1) 49%,
+    rgba(255, 255, 255, 1) 49%) no-repeat center center fixed;
+  /* background-size : length;
+  background-repeat: no-repeat; */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#ffffff',GradientType=1 ); 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -11,3 +28,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* #root{
+  width : 100%;
+  height : 100%;
+} */

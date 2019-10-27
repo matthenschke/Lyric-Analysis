@@ -38,9 +38,9 @@ class Home extends Component {
             To get started, type in an artist or a song in the search bar
           </h4>
         </div>
-        <form  onSubmit={this.handleSubmit}>
+        <form id = "form" onSubmit={this.handleSubmit}>
           <input id = "search-bar"
-            type="text"
+            type="text" placeholder = "Please enter a song or an artist"
             onChange={this.handleChange}
             value={this.state.query}
           ></input>

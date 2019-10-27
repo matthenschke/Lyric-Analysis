@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Acme&display=swap");
+
 .App {
   text-align: center;
 }
@@ -7,7 +9,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,16 +21,46 @@
 .App-link {
   color: #09d3ac;
 }
+/* Home */
+#home {
+  font-family: "Acme", sans-serif;
+}
 
+#form{
+  margin-top : 120px;
+}
 #search-bar {
   width: 430px;
-  height : 40px;
-  border-radius: 30px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+#search-bar:focus {
+  border-color: dodgerblue;
+  box-shadow: 0 0 8px 0 dodgerblue;
 }
 
 #submit-button {
   border-radius: 30px;
 }
+#submit-button:hover {
+  background-color: #282c34;
+}
+#submit-button:focus {
+  outline: none;
+}
+
+@media screen and (max-width : 550px){
+  #submit-button {
+    margin-top : 30px;
+  }
+}
+
+/* Analysis */
 #analysis-page {
   text-align: center;
 }
