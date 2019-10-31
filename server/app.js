@@ -13,7 +13,7 @@ const { IamAuthenticator } = require("ibm-watson/auth");
 
 const nlu = new NaturalLanguageUnderstandingV1({
   authenticator: new IamAuthenticator({
-    apikey: "API-KEY"
+    apikey: "mJuagn0o6LJRHjlyTG11tNrFf5ArtNCrb6SEcOkKCTW7"
   }),
   version: "2018-04-05",
   url: "https://gateway.watsonplatform.net/natural-language-understanding/api/"
@@ -26,7 +26,7 @@ const cheerio = require("cheerio");
 // set up genius api
 const api = require("genius-api");
 const genius = new api(
-  "API-KEY"
+  "zT4I1Hkl10JyTQzEN92mD40FcNJLTFewWiT_zpEGmEZieUvyqmgJadPkaaC8oaPO"
 );
 
 app.get("/songs/:query", (req, res) => {
