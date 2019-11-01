@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Lyric-Analysis/static/css/main.100d06b3.chunk.css",
+    "main.js": "/Lyric-Analysis/static/js/main.cec375ce.chunk.js",
+    "main.js.map": "/Lyric-Analysis/static/js/main.cec375ce.chunk.js.map",
+    "runtime-main.js": "/Lyric-Analysis/static/js/runtime-main.14a04ddc.js",
+    "runtime-main.js.map": "/Lyric-Analysis/static/js/runtime-main.14a04ddc.js.map",
+    "static/js/2.bb115589.chunk.js": "/Lyric-Analysis/static/js/2.bb115589.chunk.js",
+    "static/js/2.bb115589.chunk.js.map": "/Lyric-Analysis/static/js/2.bb115589.chunk.js.map",
+    "index.html": "/Lyric-Analysis/index.html",
+    "precache-manifest.4d5e38cd05d6f04faebf9caecd25e7ac.js": "/Lyric-Analysis/precache-manifest.4d5e38cd05d6f04faebf9caecd25e7ac.js",
+    "service-worker.js": "/Lyric-Analysis/service-worker.js",
+    "static/css/main.100d06b3.chunk.css.map": "/Lyric-Analysis/static/css/main.100d06b3.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.14a04ddc.js",
+    "static/js/2.bb115589.chunk.js",
+    "static/css/main.100d06b3.chunk.css",
+    "static/js/main.cec375ce.chunk.js"
+  ]
+}
