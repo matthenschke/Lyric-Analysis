@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 // importing react router dom and its components
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
 // importing react components
 import Home from "./Containers/Home";
@@ -19,12 +19,12 @@ class App extends Component {
   }
   render(){
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/analysis/:songID" component = {Analysis} />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
   );
 }
 }
