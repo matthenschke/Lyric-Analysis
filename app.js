@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8000;
-const path = require('path');
+const path = require("path");
 
 // Access Body Data
 const bodyParser = require("body-parser");
@@ -69,19 +69,24 @@ app.post("/", getLyrics, (req, res) => {
     .then(response => {
       const output = JSON.stringify(response.result, null, 5);
       console.log(output);
-      res.json({ "lyrics" : req.lyrics, "analysis" : output });
+      res.json({ lyrics: req.lyrics, analysis: output });
     })
     .catch(err => {
       console.log("error: ", err);
     });
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  app.use(express.static("client/build"));
+  // Handle React routing, return all requests to React app
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+} else {
+  app.use(express.static(path.join(__dirname, "/client/public")));
+  app.get("/*", function(req, res) {
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
 }
 
