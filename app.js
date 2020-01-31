@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1");
 const { IamAuthenticator } = require("ibm-watson/auth");
 
-console.log(process.env.NLU_API_KEY);
 const nlu = new NaturalLanguageUnderstandingV1({
   authenticator: new IamAuthenticator({
     apikey: process.env.NLU_API_KEY
@@ -34,9 +33,12 @@ const genius = new api(process.env.GENIUS_API_KEY);
 
 app.get("/songs/:query", (req, res) => {
   let query = req.params.query;
-  genius.search(query).then(function(response) {
-    res.json({ hits: response.hits });
-  });
+  genius
+    .search(query)
+    .then(function(response) {
+      res.json({ hits: response.hits });
+    })
+    .catch(err => console.log(err));
 });
 
 const getLyrics = (req, res, next) => {
