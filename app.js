@@ -3,6 +3,9 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const path = require("path");
 
+// get env variables
+require("dotenv").config();
+
 // Access Body Data
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -14,7 +17,7 @@ const { IamAuthenticator } = require("ibm-watson/auth");
 
 const nlu = new NaturalLanguageUnderstandingV1({
   authenticator: new IamAuthenticator({
-    apikey: "API_KEY"
+    apikey: process.env.NLU_API_KEY
   }),
   version: "2018-04-05",
   url: "https://gateway.watsonplatform.net/natural-language-understanding/api/"
@@ -26,9 +29,7 @@ const cheerio = require("cheerio");
 
 // set up genius api
 const api = require("genius-api");
-const genius = new api(
-  "API_KEY"
-);
+const genius = new api(process.env.GENIUS_API_KEY);
 
 app.get("/songs/:query", (req, res) => {
   let query = req.params.query;
