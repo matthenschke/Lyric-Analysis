@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1");
 const { IamAuthenticator } = require("ibm-watson/auth");
 
+console.log(process.env.NLU_API_KEY);
 const nlu = new NaturalLanguageUnderstandingV1({
   authenticator: new IamAuthenticator({
     apikey: process.env.NLU_API_KEY
