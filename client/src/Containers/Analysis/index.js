@@ -36,23 +36,29 @@ class Analysis extends Component {
 
       let { label, score } = analysis.sentiment.document;
 
-      let { concepts } = analysis;
-      concepts = concepts.map((concept, index) => {
-        let { text, relevance } = concept;
-        return (
-          <li key={index}>
-            <span>{`${text} `}</span>
-            <span>{`Relevancy : ${relevance}`}</span>
-          </li>
-        );
-      });
+      // let { concepts } = analysis;
+      // concepts = concepts.map((concept, index) => {
+      //   let { text, relevance } = concept;
+      //   return (
+      //     <li key={index}>
+      //       <span>{`${text} `}</span>
+      //       <span>{`Relevancy : ${relevance}`}</span>
+      //     </li>
+      //   );
+      // });
 
       let emotion = <h2>Emotional Analysis Not Available!</h2>;
-      if (analysis.emotion){
-        emotion = Object.keys(analysis.emotion.document.emotion).map((key, index) => {
-          return <li key={index}>{`${key}: ${analysis.emotion.document.emotion[key]}`}</li> 
-        })
-      } 
+      if (analysis.emotion) {
+        emotion = Object.keys(analysis.emotion.document.emotion).map(
+          (key, index) => {
+            return (
+              <li
+                key={index}
+              >{`${key}: ${analysis.emotion.document.emotion[key]}`}</li>
+            );
+          }
+        );
+      }
 
       return (
         <div id="analysis-page">
@@ -62,19 +68,19 @@ class Analysis extends Component {
           </div>
           <div id="analysis">
             <h1>Analysis</h1>
-            <div className = "text-left">
-            <div id="sentiment">
-              <h2>Sentiment</h2>
-              <p>{`Label: ${label}`}</p>
-              <p>{`Score: ${score}`}</p>
+            <div className="text-left">
+              <div id="sentiment">
+                <h2>Sentiment</h2>
+                <p>{`Label: ${label}`}</p>
+                <p>{`Score: ${score}`}</p>
+              </div>
+              <div id="concepts">
+                {/* <h2>Concepts</h2>
+              <ul>{concepts}</ul> */}
+              </div>
+              <ul id="emotion">{emotion}</ul>
             </div>
-            <div id="concepts">
-              <h2>Concepts</h2>
-              <ul>{concepts}</ul>
-            </div>
-              <ul id = "emotion">{emotion}</ul>
           </div>
-        </div>
         </div>
       );
     } else {
