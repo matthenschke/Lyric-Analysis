@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function(props) {
+const SongAnalysis = props => {
   const [lyrics, setLyrics] = useState("");
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -61,4 +61,6 @@ export default function(props) {
   } else {
     return <div id="loading">Loading...</div>;
   }
-}
+};
+
+export default SongAnalysis;

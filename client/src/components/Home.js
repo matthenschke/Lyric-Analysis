@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import SongList from "./Components/SongList";
+import SongList from "./SongList";
 import axios from "axios";
 
-export default function() {
+const Home = props => {
   const [query, setQuery] = useState("");
   const [songs, setSongs] = useState(null);
   const [submitted, setSubmit] = useState(false);
@@ -56,4 +56,6 @@ export default function() {
       {songs && <SongList songs={songs} />}
     </div>
   );
-}
+};
+
+export default Home;

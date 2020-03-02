@@ -31,16 +31,7 @@ const cheerio = require("cheerio");
 const api = require("genius-api");
 const genius = new api(process.env.GENIUS_API_KEY);
 
-app.get("/songs/:query", (req, res) => {
-  let query = req.params.query;
-  genius
-    .search(query)
-    .then(function(response) {
-      res.json({ hits: response.hits });
-    })
-    .catch(err => console.log(err));
-});
-
+// middleware
 const getLyrics = (req, res, next) => {
   axios
     .get(req.body.url)
@@ -57,6 +48,16 @@ const getLyrics = (req, res, next) => {
       res.json({ error: err });
     });
 };
+
+app.get("/songs/:query", (req, res) => {
+  let query = req.params.query;
+  genius
+    .search(query)
+    .then(function(response) {
+      res.json({ hits: response.hits });
+    })
+    .catch(err => console.log(err));
+});
 
 app.post("/", getLyrics, (req, res) => {
   console.log(req.lyrics);

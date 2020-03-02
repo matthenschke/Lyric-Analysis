@@ -5,15 +5,15 @@ import "./App.css";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
 // importing react components
-import Home from "./Containers/Home";
-import Analysis from "./Containers/Analysis";
+import Home from "./components/Home";
+import SongAnalysis from "./components/SongAnalysis";
 
 function App() {
   return (
     <HashRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/analysis/:songID" component={Analysis} />
+        <Route exact path="/analysis/:songID" component={SongAnalysis} />
       </Switch>
     </HashRouter>
   );
