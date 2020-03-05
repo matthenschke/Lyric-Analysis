@@ -30,9 +30,9 @@ const SongAnalysis = props => {
       emotion = Object.keys(analysis.emotion.document.emotion).map(
         (key, index) => {
           return (
-            <li
-              key={index}
-            >{`${key}: ${analysis.emotion.document.emotion[key]}`}</li>
+            <li key={index}>{`${key}: ${Number(
+              analysis.emotion.document.emotion[key]
+            ).toFixed(2)}%`}</li>
           );
         }
       );
@@ -50,7 +50,7 @@ const SongAnalysis = props => {
             <div id="sentiment">
               <h2>Sentiment</h2>
               <p>{`Label: ${label}`}</p>
-              <p>{`Score: ${score}`}</p>
+              <p>{`Score:  ${Number(score).toFixed(2)}%`}</p>
             </div>
             <div id="concepts"></div>
             <ul id="emotion">{emotion}</ul>

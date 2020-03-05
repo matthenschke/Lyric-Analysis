@@ -1,35 +1,55 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Card, Container, Row, Col } from "react-bootstrap";
 
 const SongList = props => {
   let { songs } = props;
-  songs = songs.map(song => {
-    const { id, full_title, header_image_thumbnail_url, url } = song.result;
-    console.log(id);
+  songs = songs.map((song, index) => {
+    const {
+      id,
+      full_title: title,
+      header_image_thumbnail_url: img,
+      url
+    } = song.result;
     return (
-      <li key={id} className="song container">
-        <h1 className="song-title">{full_title}</h1>
-        <img
-          className="song-img text-center"
-          alt=""
-          src={header_image_thumbnail_url}
-        />
-        <NavLink
-          className="song-btn btn btn-primary btn-large"
-          to={{
-            pathname: `analysis/${id}`,
-            state: { url: url }
-          }}
-        >
-          View Analyis of this Song
-        </NavLink>
-      </li>
+      <Col key={id} sm="4" className="mb-3">
+        <Card className="h-100">
+          <Card.Img variant="top" alt={title} src={img} />
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <NavLink
+              className="song-btn btn btn-primary btn-large mt-5"
+              to={{
+                pathname: `analysis/${id}`,
+                state: { url: url }
+              }}
+            >
+              View Analysis of this Song
+            </NavLink>
+          </Card.Body>
+        </Card>
+      </Col>
+
+      // <li key={id} className="song container">
+      //   <h1 className="song-title">{full_title}</h1>
+      //   <img
+      //     className="song-img text-center"
+      //     alt=""
+      //     src={header_image_thumbnail_url}
+      //   />
+      // </li>
     );
   });
-  return (
-    <div id="song-list" className="text-left">
-      <ul>{songs}</ul>
-    </div>
+  return songs ? (
+    <Container>
+      <Row className="mt-5">{songs}</Row>
+    </Container>
+  ) : (
+    // <div>
+    //   <h2 className="text-center">Songs Found:</h2>
+    //   <ul>{songs}</ul>
+    // </div>
+    ""
   );
 };
 
