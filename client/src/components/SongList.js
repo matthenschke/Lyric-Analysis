@@ -16,7 +16,7 @@ const SongList = props => {
         <Card className="h-100">
           <Card.Img variant="top" alt={title} src={img} />
           <Card.Body>
-            <Card.Title className="pb-5 pt-3">{title}</Card.Title>
+            <Card.Title className="pb-5 pt-3 mb-3">{title}</Card.Title>
             <NavLink
               className="song-btn btn btn-primary btn-large mt-5"
               to={{
