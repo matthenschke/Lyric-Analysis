@@ -26,64 +26,55 @@ const SongAnalysis = props => {
 
   if (!loading) {
     let { label, score } = analysis.sentiment.document;
-    let emotion = <h2>Emotional Analysis Not Available!</h2>;
+    let emotion;
+    let chartData = [];
     if (analysis.emotion) {
-      emotion = Object.keys(analysis.emotion.document.emotion).map(
-        (key, index) => {
-          return (
-            <li key={index}>{`${key}: ${Number(
-              analysis.emotion.document.emotion[key]
-            ).toFixed(2)}%`}</li>
-          );
-        }
-      );
+      emotion = Object.keys(analysis.emotion.document.emotion).forEach(key => {
+        chartData.push([
+          key,
+          Number(analysis.emotion.document.emotion[key]) * 100
+        ]);
+      });
     }
+    console.log(chartData);
 
     return (
-      <div id="analysis-page">
-        <div id="lyrics">
+      <div className="d-flex flex-column align-items-center container py-5 text-center">
+        <div className="py-5 lyrics">
           <h1>Song Lyrics</h1>
           <p style={{ whiteSpace: "pre-wrap" }}>{lyrics}</p>
         </div>
         <div id="analysis">
-          <h1>Analysis</h1>
-          <div className="d-flex flex-row justify-content-center">
-            <div id="sentiment" className="p-2">
+          <h1 className="py-5-lg py-3 pl-n5">Analysis</h1>
+          <div className="d-flex flex-lg-row flex-column justify-content-center align-items-center pl-5">
+            <div className="sentiment pr-5">
               <h2>Sentiment</h2>
-              <h3>{`Label: ${label}`}</h3>
-              <h3>{`Score:  ${Number(score).toFixed(2)}%`}</h3>
+              <p className="lead">{`Label: ${label.charAt(0).toUpperCase() +
+                label.slice(1)}`}</p>
+              <p className="lead">{`Score:  ${Number(score)}%`}</p>
             </div>
-            <div className="p-2">
-              <ul id="emotion">{emotion}</ul>
+            <div className="bar-chart">
+              {analysis.emotion && (
+                <Chart
+                  chartType="BarChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[["Emotion", "Score"], ...chartData]}
+                  options={{
+                    title: "Emotion Scores",
+                    chartArea: { width: "50%" },
+                    hAxis: {
+                      title: "Score",
+                      minValue: 0
+                    },
+                    vAxis: {
+                      title: "Emotion"
+                    }
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
-        <Chart
-          width={"500px"}
-          height={"300px"}
-          chartType="BarChart"
-          loader={<div>Loading Chart</div>}
-          data={[
-            ["City", "2010 Population", "2000 Population"],
-            ["New York City, NY", 8175000, 8008000],
-            ["Los Angeles, CA", 3792000, 3694000],
-            ["Chicago, IL", 2695000, 2896000],
-            ["Houston, TX", 2099000, 1953000],
-            ["Philadelphia, PA", 1526000, 1517000]
-          ]}
-          options={{
-            title: "Population of Largest U.S. Cities",
-            chartArea: { width: "50%" },
-            isStacked: true,
-            hAxis: {
-              title: "Total Population",
-              minValue: 0
-            },
-            vAxis: {
-              title: "City"
-            }
-          }}
-        />
       </div>
     );
   } else {

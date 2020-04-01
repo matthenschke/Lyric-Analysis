@@ -12,7 +12,7 @@ const SongList = props => {
       url
     } = song.result;
     return (
-      <Col key={id} sm="4" className="mb-3">
+      <Col key={id} lg="4" className="mb-3">
         <Card className="h-100">
           <Card.Img variant="top" alt={title} src={img} />
           <Card.Body>
@@ -29,27 +29,14 @@ const SongList = props => {
           </Card.Body>
         </Card>
       </Col>
-
-      // <li key={id} className="song container">
-      //   <h1 className="song-title">{full_title}</h1>
-      //   <img
-      //     className="song-img text-center"
-      //     alt=""
-      //     src={header_image_thumbnail_url}
-      //   />
-      // </li>
     );
   });
-  return songs ? (
-    <Container>
-      <Row className="mt-5">{songs}</Row>
-    </Container>
-  ) : (
-    // <div>
-    //   <h2 className="text-center">Songs Found:</h2>
-    //   <ul>{songs}</ul>
-    // </div>
-    ""
+  return (
+    songs && (
+      <Container>
+        <Row className="mt-5">{songs}</Row>
+      </Container>
+    )
   );
 };
 

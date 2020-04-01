@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Acme", sans-serif;
 }
 html,
 body {
@@ -10,6 +9,7 @@ body {
 }
 
 body {
+  font-family: "Acme", sans-serif;
   background: linear-gradient(
       35deg,
       rgba(229, 112, 231, 1) 0%,

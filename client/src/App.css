@@ -139,3 +139,7 @@ html {
 #analysis-page ul {
   list-style: none;
 }
+
+.bar-chart {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
