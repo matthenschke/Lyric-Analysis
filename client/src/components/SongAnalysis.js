@@ -26,7 +26,7 @@ const SongAnalysis = props => {
   }, [loading]);
 
   if (!loading) {
-    let { label, score } = analysis.sentiment.document;
+    let { score } = analysis.sentiment.document;
     let emotion;
     let chartData = [];
     if (analysis.emotion) {
@@ -34,7 +34,6 @@ const SongAnalysis = props => {
         chartData.push([key, Number(analysis.emotion.document.emotion[key])]);
       });
     }
-    console.log(chartData);
 
     return (
       <div className="d-flex flex-column align-items-center container py-5 text-center">
@@ -47,9 +46,6 @@ const SongAnalysis = props => {
           <div className="d-flex flex-lg-row flex-column justify-content-center align-items-center pl-5">
             <div className="sentiment pr-5">
               <h2>Sentiment</h2>
-              <p className="lead">{`Label: ${label.charAt(0).toUpperCase() +
-                label.slice(1)}`}</p>
-
               <p className="lead">{`Score:  ${Number(score)}`}</p>
               <p className="small">
                 *Score ranges from -1 (negative sentiment) to 1 (positive
