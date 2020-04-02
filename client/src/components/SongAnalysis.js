@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Chart } from "react-google-charts";
+import { Spinner } from "react-bootstrap";
 
 const SongAnalysis = props => {
   const [lyrics, setLyrics] = useState("");
@@ -30,10 +31,7 @@ const SongAnalysis = props => {
     let chartData = [];
     if (analysis.emotion) {
       emotion = Object.keys(analysis.emotion.document.emotion).forEach(key => {
-        chartData.push([
-          key,
-          Number(analysis.emotion.document.emotion[key]) * 100
-        ]);
+        chartData.push([key, Number(analysis.emotion.document.emotion[key])]);
       });
     }
     console.log(chartData);
@@ -51,34 +49,46 @@ const SongAnalysis = props => {
               <h2>Sentiment</h2>
               <p className="lead">{`Label: ${label.charAt(0).toUpperCase() +
                 label.slice(1)}`}</p>
-              <p className="lead">{`Score:  ${Number(score)}%`}</p>
+
+              <p className="lead">{`Score:  ${Number(score)}`}</p>
+              <p className="small">
+                *Score ranges from -1 (negative sentiment) to 1 (positive
+                sentiment)
+              </p>
             </div>
-            <div className="bar-chart">
-              {analysis.emotion && (
-                <Chart
-                  chartType="BarChart"
-                  loader={<div>Loading Chart</div>}
-                  data={[["Emotion", "Score"], ...chartData]}
-                  options={{
-                    title: "Emotion Scores",
-                    chartArea: { width: "50%" },
-                    hAxis: {
-                      title: "Score",
-                      minValue: 0
-                    },
-                    vAxis: {
-                      title: "Emotion"
-                    }
-                  }}
-                />
-              )}
-            </div>
+
+            {analysis.emotion && (
+              <div>
+                <div className="bar-chart">
+                  <Chart
+                    chartType="BarChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[["Emotion", "Score"], ...chartData]}
+                    options={{
+                      title: "Emotion Scores",
+                      chartArea: { width: "50%" },
+                      hAxis: {
+                        title: "Score",
+                        minValue: 0
+                      },
+                      vAxis: {
+                        title: "Emotion"
+                      }
+                    }}
+                  />
+                </div>
+                <p className="small pt-2">
+                  *Score ranges from 0 (does not convey emotion) to 1 (conveys
+                  emotion)
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     );
   } else {
-    return <div id="loading">Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 };
 
