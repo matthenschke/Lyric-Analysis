@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import SongAnalysis from "./components/SongAnalysis";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Switch>
@@ -17,5 +17,5 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 export default App;

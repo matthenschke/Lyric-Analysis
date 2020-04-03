@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Chart } from "react-google-charts";
-import { Spinner } from "react-bootstrap";
 
-const SongAnalysis = props => {
+interface SongAnalysisProps {
+  location: {
+    state: {
+      url: string;
+    };
+  };
+}
+const SongAnalysis: React.FC<SongAnalysisProps> = ({ location: { state } }) => {
   const [lyrics, setLyrics] = useState("");
-  const [analysis, setAnalysis] = useState(null);
+  const [analysis, setAnalysis] = useState({} as Analysis);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,7 +19,7 @@ const SongAnalysis = props => {
       return;
     }
     const asyncFunction = async () => {
-      const { url } = props.location.state;
+      const { url } = state;
       const { data } = await axios.post("/", { url });
       console.log(data);
       setLyrics(data.lyrics);
@@ -21,14 +27,18 @@ const SongAnalysis = props => {
       setLoading(false);
       console.log(analysis);
     };
-    console.log(props);
+
     asyncFunction();
   }, [loading]);
 
   if (!loading) {
-    let { score } = analysis.sentiment.document;
+    const {
+      sentiment: {
+        document: { score }
+      }
+    } = analysis;
     let emotion;
-    let chartData = [];
+    let chartData: any = [];
     if (analysis.emotion) {
       emotion = Object.keys(analysis.emotion.document.emotion).forEach(key => {
         chartData.push([key, Number(analysis.emotion.document.emotion[key])]);
