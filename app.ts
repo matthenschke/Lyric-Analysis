@@ -22,7 +22,7 @@ export class App {
   }
 
   private initializeControllers(): void {
-    this.app.use("/songs", SongController);
+    this.app.use("/song", SongController);
   }
 
   private initializeClient(): void {

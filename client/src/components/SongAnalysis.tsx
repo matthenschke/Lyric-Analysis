@@ -20,7 +20,7 @@ const SongAnalysis: React.FC<SongAnalysisProps> = ({ location: { state } }) => {
     }
     const asyncFunction = async () => {
       const { url } = state;
-      const { data } = await axios.post("/", { url });
+      const { data } = await axios.post("/song/analysis", { url });
       setLyrics(data.lyrics);
       setAnalysis(JSON.parse(data.analysis));
       setLoading(false);

@@ -11,15 +11,16 @@ const Home: React.FC = () => {
     if (!submitted) {
       return;
     }
-    axios
-      .get(`songs/${query}`)
-      .then(res => {
-        const { hits } = res.data;
-        setSongs(hits);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+
+    const asyncFunction = async () => {
+      const {
+        data: { hits: songs },
+      } = await axios.get(`song/${query}`);
+
+      setSongs(songs);
+    };
+
+    asyncFunction();
   }, [submitted, query]);
 
   return (
@@ -41,7 +42,7 @@ const Home: React.FC = () => {
           id="search-bar"
           type="text"
           placeholder="Please enter a song or an artist"
-          onChange={e => {
+          onChange={(e) => {
             setQuery(e.target.value);
           }}
           value={query}
