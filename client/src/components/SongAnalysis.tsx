@@ -21,11 +21,9 @@ const SongAnalysis: React.FC<SongAnalysisProps> = ({ location: { state } }) => {
     const asyncFunction = async () => {
       const { url } = state;
       const { data } = await axios.post("/", { url });
-      console.log(data);
       setLyrics(data.lyrics);
       setAnalysis(JSON.parse(data.analysis));
       setLoading(false);
-      console.log(analysis);
     };
 
     asyncFunction();
@@ -34,15 +32,17 @@ const SongAnalysis: React.FC<SongAnalysisProps> = ({ location: { state } }) => {
   if (!loading) {
     const {
       sentiment: {
-        document: { score }
-      }
+        document: { score },
+      },
     } = analysis;
     let emotion;
     let chartData: any = [];
     if (analysis.emotion) {
-      emotion = Object.keys(analysis.emotion.document.emotion).forEach(key => {
-        chartData.push([key, Number(analysis.emotion.document.emotion[key])]);
-      });
+      emotion = Object.keys(analysis.emotion.document.emotion).forEach(
+        (key) => {
+          chartData.push([key, Number(analysis.emotion.document.emotion[key])]);
+        }
+      );
     }
 
     return (
@@ -75,11 +75,11 @@ const SongAnalysis: React.FC<SongAnalysisProps> = ({ location: { state } }) => {
                       chartArea: { width: "50%" },
                       hAxis: {
                         title: "Score",
-                        minValue: 0
+                        minValue: 0,
                       },
                       vAxis: {
-                        title: "Emotion"
-                      }
+                        title: "Emotion",
+                      },
                     }}
                   />
                 </div>
