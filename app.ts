@@ -11,8 +11,8 @@ export class App {
     this.app = express();
     this.port = process.env.PORT || 8000;
     this.initializeMiddleware();
-    this.initializeRoutes();
-    // this.initializeClient();
+    this.initializeControllers();
+    this.initializeClientRoutes();
     this.listen();
   }
 
@@ -21,9 +21,11 @@ export class App {
     this.app.use(bodyparser.urlencoded({ extended: true }));
   }
 
-  private initializeRoutes(): void {
+  private initializeControllers(): void {
     this.app.use("/song", SongController);
+  }
 
+  private initializeClientRoutes(): void {
     if (process.env.NODE_ENV === "production") {
       // Serve any static files
       this.app.use(express.static("client/build"));
@@ -38,6 +40,7 @@ export class App {
       });
     }
   }
+
   private listen(): void {
     this.app.listen(this.port, () => {
       console.log(`Server is running on Port: ${this.port}`);
